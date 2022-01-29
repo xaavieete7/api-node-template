@@ -45,6 +45,22 @@ function getCarById(req, res) {
 // Save car and returned created object
 function saveCar(req, res) {
 
+    // 406: Not Acceptable
+    if (!req.body.brand) { return res.status(406).send({ message: "Brand is required" }) }
+
+    // 406: Not Acceptable
+    if (!req.body.model) { return res.status(406).send({ message: "Model is required" }) }
+
+    // 406: Not Acceptable
+    if (!req.body.color) { return res.status(406).send({ message: "Color is required" }) }
+
+    // 406: Not Acceptable
+    if (!req.body.power) { return res.status(406).send({ message: "Power is required" }) }
+
+    // 406: Not Acceptable
+    if (!req.body.price) { return res.status(406).send({ message: "Price is required" }) }
+
+
     let car = new Car({
        brand: req.body.brand,
        model: req.body.model,
