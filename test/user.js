@@ -14,6 +14,7 @@ chai.use(chaiHttp);
 
 // Import the main file to get all the routes
 const app = require('../index');
+const TokenService = require("../services/authToken");
 
 // Add some "pseudonimo" I don't know how to say in English
 const expect = chai.expect;
@@ -196,7 +197,7 @@ describe('User', () => {
 
     });
 
-    describe('/GET /api/users', () => {
+    describe('/GET /api/users/', () => {
 
         it('it should GET user by id', (done) => {
 
@@ -210,30 +211,30 @@ describe('User', () => {
 
                 expect(err).to.equals(null);
 
-                chai.request(app)
-                    .post("/api/login")
-                    .send(user)
-                    .end((err, res) => {
+                User.findOne({ email: user.email }, (err, user) => {
 
-                        expect(err).to.equals(null);
-                        expect(res).to.have.status(200);
-                        expect(res.body).to.have.property("message");
-                        expect(res.body.message).to.equals("Successfully logged in");
+                    expect(err).to.equals(null);
+                    expect(user).not.undefined;
+                    expect(user.id).not.undefined;
+                    let authToken = TokenService.createToken(user.id);
+                    expect(authToken).not.undefined;
 
-                        chai.request(app)
-                            .get("/api/user/" + user.id)
-                            .set("authorization", res.body.token)
-                            .end((err, res) => {
+                    chai.request(app)
+                        .get("/api/user/" + user.id)
+                        .set("authorization", authToken)
+                        .end((err, res) => {
 
-                                expect(err).to.equals(null);
-                                expect(res).to.have.status(200);
-                                expect(res.body).to.have.property("message");
-                                expect(res.body.message).to.equals("Successfully");
-                                expect(res.body.user).to.have.property("_id");
-                                expect(res.body.user).to.have.property("email");
+                            expect(err).to.equals(null);
+                            expect(res).to.have.status(200);
+                            expect(res.body).to.have.property("message");
+                            expect(res.body.message).to.equals("Successfully");
+                            expect(res.body.user).to.have.property("_id");
+                            expect(res.body.user).to.have.property("email");
 
-                            });
-                    });
+                        });
+
+                });
+
             });
 
             done();
