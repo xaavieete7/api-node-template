@@ -8,10 +8,16 @@ const bcrypt = require('bcrypt-nodejs'); // src: https://www.npmjs.com/package/b
 // Ask Xavi for more information if you needed :)
 const Schema = mongoose.Schema;
 
+// Copy and paste from Stack Overflow
+const validateEmail = function (email) {
+    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(email);
+};
+
 const UserSchema = new Schema({
-    email: { type: String, unique: true },
+    email: { type: String, unique: true, required: true, validate: [validateEmail, 'Email format is invalid'] },
     // TODO: Investigar que significa la propiedad select. Crec k siginifica k amb un selec no obtinguis la dada que quedi oculta! Comprovarﬁ
-    password: { type: String, select: false }
+    password: { type: String, select: false, required: true }
 });
 
 // TODO: Mirar de averigurar perque no es xifra el password!
@@ -36,9 +42,6 @@ UserSchema.pre('save', (next => {
 
             // Send the error to the next function
             if (err) { return next(err) }
-
-            console.log("old passwrod: " + user.password);
-            console.log("new password: " + hash);
 
             // Save the hashed password into the schema
             user.password = hash;
