@@ -10,10 +10,10 @@ const moment = require('moment'); // src: https://www.npmjs.com/package/moment
 const config = require('../config/config');
 
 // Give in a user create an unique token with her information
-function createToken(user) {
+function createToken(user_id) {
 
     const tokenData = {
-        sub: user.id,
+        sub: user_id,
         // Unique timestamp
         iat: moment().unix(),
         // Timestamp with expire date
