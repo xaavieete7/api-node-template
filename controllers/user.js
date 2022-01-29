@@ -26,7 +26,7 @@ function createAccount(req, res) {
 
        // Return success code and user token
        // 200: Successfully
-       return res.status(200).send({ token: TokenService.createToken(user)});
+       return res.status(200).send({ token: TokenService.createToken(user.id)});
 
     });
 
@@ -50,7 +50,7 @@ function login(req, res) {
         if (!user) { return res.status(404).send({ message: "User not found"}) }
 
         // 200: Success
-        return res.status(200).send({ message: "Successfully logged in", token: TokenService.createToken(user) });
+        return res.status(200).send({ message: "Successfully logged in", token: TokenService.createToken(user.id) });
 
     });
 
