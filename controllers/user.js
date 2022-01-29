@@ -6,6 +6,12 @@ const TokenService = require('../services/authToken');
 
 function createAccount(req, res) {
 
+    // 406: Not Acceptable
+    if (!req.body.email) { return res.status(406).send( { message: "The email is required" }) }
+
+    // 406: Not Acceptable
+    if (!req.body.password) { return res.status(406).send({ message: "The password is required" }) }
+
     // Create user "Object"
     const user = new User({
        email: req.body.email,
@@ -27,6 +33,13 @@ function createAccount(req, res) {
 }
 
 function login(req, res) {
+
+    // 406: Not Acceptable
+    if (!req.body.email) { return res.status(406).send( { message: "The email is required" }) }
+
+    // 406: Not Acceptable
+    if (!req.body.password) { return res.status(406).send({ message: "The password is required" }) }
+
     // TODO: Mirar com podem validar que el user esta be i el password tambe (perque el password esta xifrat)
     User.findOne({ email: req.body.email }, (err, user) => {
 
