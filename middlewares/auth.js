@@ -7,7 +7,7 @@ function isAuth (req, res, next) {
 
     if (!req.headers.authorization) {
         // 403: Forbidden
-        return res.status(403).send({ message: 'You dont have auth token' })
+        return res.status(416).send({ message: 'You dont have auth token' })
     }
 
     // Get auth token
