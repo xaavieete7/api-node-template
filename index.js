@@ -17,13 +17,18 @@ const config = require('./config/config');
 mongoose.connect(config.DB, (err, res) => {
 
     // 500: Internal error
-    if (err) { return res.status(500).send({ message: "Unable connect to database", error: err }) }
+    if (err) {
+        console.log("Error al connectar a la base de datos");
+        return res.status(500).send({ message: "Unable connect to database", error: err })
+    }
 
     // Start app
     app.listen(config.PORT, () => {
        console.log("Successfully database connection!");
        console.log(`Listening at port ${config.PORT}`);
     });
+
+    console.log("Si salgo solo significa que hay problemas guap@");
 
 });
 
