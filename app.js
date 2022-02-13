@@ -17,5 +17,9 @@ app.use(bodyParser.urlencoded({
 // Redirect all the petition at routes/api.js
 app.use('/api', api);
 
+app.get('/', function (req, res) {
+    res.send("Funciono");
+});
+
 
 module.exports = app;
