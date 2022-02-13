@@ -19,6 +19,7 @@ mongoose.connect(config.DB, (err, res) => {
     // 500: Internal error
     if (err) {
         console.log("Error al connectar a la base de datos");
+        console.log(err);
         return res.status(500).send({ message: "Unable connect to database", error: err })
     }
 
