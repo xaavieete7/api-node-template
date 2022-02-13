@@ -1,7 +1,7 @@
 module.exports = {
 
     // Db connection string
-    DB: 'mongodb://dumbledore:8aywFyUYmaN#@mongo-prod:27017/main-api-project',
+    DB: 'mongodb://dumbledore:xavi123@mongo-prod:27017/main-api-project',
 
     // Specify the execution code
     PORT: 8000,
