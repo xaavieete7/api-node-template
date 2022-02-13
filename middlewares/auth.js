@@ -5,8 +5,6 @@ const TokenService = require('../services/authToken');
 
 function isAuth (req, res, next) {
 
-    console.log("entro isAuth");
-
     if (!req.headers.authorization) {
         // 403: Forbidden
         return res.status(416).send({ message: 'You dont have auth token' })

@@ -6,8 +6,6 @@ const Car = require('../models/car');
 // Return JSON with all the cars
 function getCars(req, res) {
 
-    console.log("entro getCars");
-
     // Execute find method without filters to get all the items
     Car.find({}, (err, cars) => {
 

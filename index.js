@@ -29,8 +29,6 @@ mongoose.connect(config.DB, (err, res) => {
        console.log(`Listening at port ${config.PORT}`);
     });
 
-    console.log("Si salgo solo significa que hay problemas guap@");
-
 });
 
 module.exports = app;

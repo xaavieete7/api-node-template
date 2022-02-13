@@ -13,7 +13,6 @@ const isAuth = require('../middlewares/auth');
 const userCtrl = require('../controllers/user');
 const carCtrl = require('../controllers/car');
 
-console.log("JODER JODER");
 // GET endpoints
 api.get('/cars', isAuth, carCtrl.getCars);
 api.get('/car/:id', isAuth, carCtrl.getCarById);
